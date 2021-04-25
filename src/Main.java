@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,16 +21,27 @@ public class Main {
         int[][] need = new int[processes][resources];
         for (int i = 0; i < processes; ++i) for (int j = 0; j < resources; ++j) need[i][j] = maximum[i][j] - allocation[i][j];
 
-        State state = new State(processes, resources, available, maximum, allocation, need);
-        System.out.println(state.isSafe());
+        State state = new State(processes, resources, available, maximum, allocation);
+        state.isSafe();
 
         Bank bank = new Bank(state);
-        try{
-            System.out.println(bank.request(1, new int[]{1, 0, 2}));
-            System.out.println(bank.request(4, new int[]{3, 3, 0}));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+
+            Scanner sc = new Scanner(System.in);
+//            System.out.println(bank.request(1, new int[]{1, 0, 2}));
+//            System.out.println(bank.request(4, new int[]{3, 3, 0}));
+
+            String input = sc.nextLine();
+
+            while (!input.equals("Quit")){
+                try{
+                    bank.parse(input);
+                }catch(Exception e){
+                    System.out.println("Deny");
+                    System.out.println(e.getMessage());
+                }
+                    input = sc.nextLine();
+            }
+
 
         return;
     }

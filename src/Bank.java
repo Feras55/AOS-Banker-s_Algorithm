@@ -8,13 +8,12 @@ public class Bank {
         int[] available = new int[resources];
         int[][] maximum = new int[processes][resources];
         int[][] allocation = new int[processes][resources];
-        int[][] need = new int[processes][resources];
 
-        state = new State(processes, resources, available, maximum, allocation, need);
+        state = new State(processes, resources, available, maximum, allocation);
     }
 
     public Bank(int processes, int resources, int[] available, int[][] maximum, int[][] allocation, int[][] need){
-        State state = new State(processes, resources, available, maximum, allocation, need);
+        State state = new State(processes, resources, available, maximum, allocation);
     }
 
     public Bank(State state){
@@ -22,8 +21,20 @@ public class Bank {
     }
 
     // parses the command & handles exceptions
-    public boolean parse(String cmd){
-        return true;
+    public boolean parse(String cmd) throws Exception {
+        System.out.println(cmd);
+        String[] arg = cmd.split(" ");
+        int[] Array = new int[arg.length-2];
+
+        for (int i=2;i<arg.length;i++)Array[i-2]=Integer.parseInt(arg[i]);
+
+        if(arg[0].toLowerCase().equals("rq") ){
+            return request(Integer.parseInt(arg[1]),Array);
+        }else if(arg[0].toLowerCase().equals("rl") ){
+            return release(Integer.parseInt(arg[1]),Array);
+        }else{
+            throw new Exception("Not a valid command");
+        }
     }
 
     // adds a process by making a new state with a new entry, new process allocation should start with zero thus need = maximum
