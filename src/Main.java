@@ -29,7 +29,7 @@ public class Main {
 
             String input = sc.nextLine();
 
-            while (!input.equals("Quit")){
+            while (!input.toLowerCase().equals("quit")){
                 try{
                     bank.parse(input);
                 }catch(Exception e){
