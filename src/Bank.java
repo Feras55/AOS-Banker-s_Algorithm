@@ -24,6 +24,10 @@ public class Bank {
     public boolean parse(String cmd) throws Exception {
         System.out.println(cmd);
         String[] arg = cmd.split(" ");
+
+        if(arg.length != state.resources+2)throw new Exception("Not enough args");
+
+
         int[] Array = new int[arg.length-2];
 
         for (int i=2;i<arg.length;i++)Array[i-2]=Integer.parseInt(arg[i]);

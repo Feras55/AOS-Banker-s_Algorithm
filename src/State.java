@@ -85,6 +85,7 @@ public class State {
     }
 
     public boolean request(int pid, int[] requestArray) throws Exception {
+        if(pid>=resources || pid<0)throw new Exception("ID is not valid");
         // raise error condition, since process has exceeded its maximum claim
         if (!cmpArrays(requestArray, need[pid], resources)) throw new Exception("Process has exceeded its maximum claim");
         // Process i must wait, since resources are not available
@@ -111,6 +112,7 @@ public class State {
     }
 
     public boolean release(int pid, int[] releaseArray) throws Exception {
+        if(pid>=resources || pid<0)throw new Exception("ID is not valid");
         // raise error condition, since process can't release more than whats allocated for it
         if (!cmpArrays(releaseArray, allocation[pid], resources)) throw new Exception("Process can't release more than whats allocated for it");
 

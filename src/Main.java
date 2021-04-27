@@ -18,13 +18,10 @@ public class Main {
                 {3, 0, 2},
                 {2, 1, 1},
                 {0, 0, 2}};
-        int[][] need = new int[processes][resources];
-        for (int i = 0; i < processes; ++i) for (int j = 0; j < resources; ++j) need[i][j] = maximum[i][j] - allocation[i][j];
 
-        State state = new State(processes, resources, available, maximum, allocation);
-        state.isSafe();
-
-        Bank bank = new Bank(state);
+            State state = new State(processes, resources, available, maximum, allocation);
+            state.isSafe();
+            Bank bank = new Bank(state);
 
             Scanner sc = new Scanner(System.in);
 //            System.out.println(bank.request(1, new int[]{1, 0, 2}));
